@@ -238,7 +238,26 @@ Used when SSH is broken or server is unreachable.
 * Cloud servers → Portal SSH / Console
 * Enterprise security → VPN + Bastion
 
----
+---Root dir
+/
+├── bin        → Essential user commands (ls, cp, mv)
+├── sbin       → System admin commands (reboot, fdisk)
+├── etc        → Configuration files (sshd_config, passwd)
+├── home       → User directories (e.g., /home/shakeer)
+├── root       → Root user home directory
+├── var        → Logs, spool files, dynamic data
+├── usr        → Applications, libraries, shared programs
+│   ├── bin
+│   ├── lib
+│   └── local
+├── lib        → Shared libraries for system binaries
+├── tmp        → Temporary files (cleared on reboot)
+├── dev        → Device files (disks, terminals, etc.)
+├── proc       → Virtual process and kernel info
+├── sys        → Kernel and hardware info interface
+├── boot       → Boot loader files (kernel, initramfs)
+├── opt        → Optional third-party software
+└── mnt / media → Mount points for external devices
 
 
 
