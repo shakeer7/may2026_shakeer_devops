@@ -1,3 +1,28 @@
+##Netwoking_commands
+
+| Command            | Purpose                            | Common Usage                  | Example Output/Use               |
+| ------------------ | ---------------------------------- | ----------------------------- | -------------------------------- |
+| `ip a`             | Show IP addresses and interfaces   | `ip a`                        | Displays private IP, NIC details |
+| `ifconfig`         | Old command to view network config | `ifconfig`                    | Shows IP and interface info      |
+| `ping`             | Check connectivity                 | `ping google.com`             | Tests reachability and latency   |
+| `ping -c 4`        | Send limited packets               | `ping -c 4 google.com`        | Sends 4 ping requests            |
+| `ss -tulnp`        | Show listening ports/processes     | `ss -tulnp`                   | Displays open TCP/UDP ports      |
+| `netstat -tulnp`   | Old tool for network stats         | `netstat -tulnp`              | Shows listening services         |
+| `curl URL`         | Access/test websites or APIs       | `curl https://api.github.com` | Fetches webpage/API response     |
+| `curl -I`          | Show only HTTP headers             | `curl -I google.com`          | Checks HTTP status               |
+| `curl ifconfig.me` | Get public IP                      | `curl ifconfig.me`            | Displays public IP address       |
+| `traceroute`       | Show network path/hops             | `traceroute google.com`       | Displays route to destination    |
+| `nslookup`         | DNS lookup                         | `nslookup google.com`         | Resolves domain to IP            |
+| `dig`              | Advanced DNS query                 | `dig google.com`              | Detailed DNS information         |
+| `hostname`         | Show system hostname               | `hostname`                    | Displays machine name            |
+| `hostname -I`      | Show local IP                      | `hostname -I`                 | Displays assigned IP             |
+| `telnet`           | Test connectivity to a port        | `telnet google.com 80`        | Checks if port is reachable      |
+| `nc -zv`           | Netcat port test                   | `nc -zv google.com 443`       | Verifies port connectivity       |
+| `route -n`         | Show routing table                 | `route -n`                    | Displays routes/gateway          |
+| `ip route`         | Modern route command               | `ip route`                    | Shows routing information        |
+| `arp -a`           | View ARP table                     | `arp -a`                      | Shows MAC-IP mappings            |
+| `wget`             | Download files                     | `wget <url>`                  | Downloads content/files          |
+| `nmap`             | Scan ports/services                | `nmap localhost`              | Finds open ports                 |
 
 #File_and_Director_Operations_Commands
 
