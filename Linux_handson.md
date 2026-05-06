@@ -1,3 +1,11 @@
+#text_processing
+| Tool | Purpose                            | Example Command                 |
+| ---- | ---------------------------------- | ------------------------------- |
+| grep | Search text in files or output     | `grep "error" logfile.txt`      |
+| awk  | Process and extract columns/fields | `awk '{print $1, $3}' file.txt` |
+| sed  | Stream edit (replace/modify text)  | `sed 's/old/new/g' file.txt`    |
+
+
 ##Netwoking_commands
 
 | Command            | Purpose                            | Common Usage                  | Example Output/Use               |
