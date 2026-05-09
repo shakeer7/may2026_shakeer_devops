@@ -436,21 +436,23 @@ print(lines[-5:])
 
 # Important DevOps Python Topics Asked in Interviews
 
-* File handling
-* Exception handling
-* APIs using requests
-* JSON/YAML parsing
-* Linux command execution
-* Log parsing
-* Automation scripts
-* Multithreading basics
-* Regex
-* OS and subprocess modules
-* Monitoring scripts
-* CSV handling
-* AWS/Azure SDK basics
-* Database connectivity
-* Health check automation
+| Topic                     | One-line Answer                                                     |
+| ------------------------- | ------------------------------------------------------------------- |
+| File handling             | Used to read, write, append, and manage files in Python.            |
+| Exception handling        | Used to handle runtime errors without crashing the program.         |
+| APIs using requests       | Used to send HTTP requests and interact with REST APIs.             |
+| JSON/YAML parsing         | Used to read and process structured configuration or data files.    |
+| Linux command execution   | Used to run shell/Linux commands from Python scripts.               |
+| Log parsing               | Used to extract useful information from application or server logs. |
+| Automation scripts        | Used to automate repetitive DevOps or system administration tasks.  |
+| Multithreading basics     | Used to run multiple tasks concurrently for better performance.     |
+| Regex                     | Used for pattern matching and searching text efficiently.           |
+| OS and subprocess modules | Used for system-level operations and command execution.             |
+| Monitoring scripts        | Used to track CPU, memory, disk, or service health.                 |
+| CSV handling              | Used to read and write comma-separated data files.                  |
+| AWS/Azure SDK basics      | Used to automate cloud resource management programmatically.        |
+| Database connectivity     | Used to connect and interact with databases using Python.           |
+| Health check automation   | Used to verify application or server availability automatically.    |
 
 ---
 
