@@ -1,0 +1,210 @@
+# Create EKS Cluster
+
+eksctl create cluster --name=observability \
+                      --region=us-east-1 \
+                      --zones=us-east-1a,us-east-1b \
+                      --without-nodegroup
+                  
+eksctl utils associate-iam-oidc-provider \
+    --region us-east-1 \
+    --cluster observability \
+    --approve
+   
+eksctl create nodegroup --cluster=observability \
+                        --region=us-east-1 \
+                        --name=observability-ng-private \
+                        --node-type=t3.medium \
+                        --nodes-min=2 \
+                        --nodes-max=3 \
+                        --node-volume-size=20 \
+                        --managed \
+                        --asg-access \
+                        --external-dns-access \
+                        --full-ecr-access \
+                        --appmesh-access \
+                        --alb-ingress-access \
+                        --node-private-networking
+
+# Update ./kube/config file
+aws eks update-kubeconfig --name observability
+
+
+# Delete the EKS Cluster 
+eksctl delete cluster --name observability
+
+০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০০
+
+Official doc:  AWS EKS Cluster Upgrade Guide￼
+
+Here’s the practical DevOps interview + real-world summary:
+
+⸻
+
+EKS Upgrade Flow
+
+1. Check current cluster version
+
+kubectl version
+kubectl get nodes
+
+Control plane and worker nodes should ideally be on the same version before upgrade.  
+
+⸻
+
+Important Rules
+
+You can upgrade only ONE minor version at a time
+
+Example:
+
+1.28 → 1.29 → 1.30
+
+NOT:
+
+1.28 → 1.30
+
+⸻
+
+Recommended Upgrade Order
+
+Step 1: Backup & Validate
+
+Check:
+
+* Deprecated APIs
+* Cluster health
+* Add-ons compatibility
+* Node versions
+* IP availability in subnets
+
+AWS recommends using Upgrade Insights before upgrading.  
+
+⸻
+
+Step 2: Upgrade Control Plane
+
+Using AWS CLI:
+
+aws eks update-cluster-version \
+  --name my-cluster \
+  --kubernetes-version 1.30 \
+  --region ap-south-1
+
+Monitor:
+
+aws eks describe-update \
+  --name my-cluster \
+  --update-id <id> \
+  --region ap-south-1
+
+⸻
+
+Step 3: Upgrade Node Groups
+
+Managed node groups:
+
+eksctl upgrade nodegroup \
+  --cluster my-cluster \
+  --name my-nodegroup
+
+Or update via console.
+
+AWS replaces old EC2 worker nodes gradually using rolling updates.  
+
+⸻
+
+Step 4: Upgrade Add-ons
+
+Very important in interviews.
+
+Update:
+
+* VPC CNI
+* CoreDNS
+* kube-proxy
+* EBS CSI Driver
+* Cluster Autoscaler
+
+Many real-world failures happen because add-ons are outdated.  
+
+⸻
+
+Step 5: Validate
+
+kubectl get nodes
+kubectl get pods -A
+
+Check:
+
+* Pods healthy
+* Ingress working
+* DNS working
+* Autoscaler working
+* Monitoring agents healthy
+
+⸻
+
+Common Real-World Problems
+
+Problem	Cause
+NodeCreationFailure	Networking or add-on mismatch
+Nodes not joining	Security groups / IAM / subnet issues
+Ingress breaks	API deprecations
+Upgrade stuck	Deprecated APIs
+Pods crash	Old manifests
+
+Examples from engineers on Reddit show failures mostly due to:
+
+* outdated CoreDNS/VPC-CNI
+* node networking
+* unsupported APIs  
+
+⸻
+
+Best Practice Used in Companies
+
+Blue-Green Upgrade
+
+Instead of in-place upgrade:
+
+1. Create new EKS cluster
+2. Deploy apps
+3. Test
+4. Switch traffic
+5. Destroy old cluster
+
+Safer for production.  
+
+⸻
+
+Important Interview Points
+
+Why EKS upgrades matter?
+
+* Security patches
+* Kubernetes support lifecycle
+* New features
+* Avoid deprecated APIs
+
+⸻
+
+Commands Interviewers Expect
+
+eksctl
+
+eksctl upgrade cluster \
+  --name my-cluster \
+  --version 1.30 \
+  --approve
+
+⸻
+
+Golden Rule
+
+Always upgrade in this order:
+
+Control Plane
+→ Node Groups
+→ Add-ons
+→ Applications
+→ kubectl clients
